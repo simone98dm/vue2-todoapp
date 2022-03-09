@@ -3,7 +3,7 @@
     <Form v-on:create="onCreateHandler"></Form>
     <h1>List</h1>
     <List
-      :items="list"
+      :items="this.$store.getters.todoItems"
       v-on:complete="onCompleteClickHandler"
       v-on:delete="onDeleteClickHandler"
       v-on:textsave="onSaveHandler"
@@ -20,77 +20,32 @@ export default {
     List,
     Form,
   },
-  beforeMount() {
-    this.list = this.list.map((todoItem, i) => {
-      todoItem.id = i;
-      todoItem.isCompleted = false;
-      todoItem.createDate = new Date().getTime();
-      todoItem.modifiedDate = new Date().getTime();
-      return todoItem;
-    });
-  },
   data() {
     return {
-      list: [
-        {
-          message:
-            "Pariatur labore fugiat quis ad ea Lorem id veniam in nulla cillum mollit culpa deserunt.",
-          id: null,
-          isCompleted: false,
-          createDate: null,
-          modifiedDate: null,
-        },
-        {
-          message: "In non dolore enim tempor elit.",
-          id: null,
-          isCompleted: false,
-          createDate: null,
-          modifiedDate: null,
-        },
-        {
-          message: "Laboris voluptate voluptate dolor consectetur ea ipsum.",
-          id: null,
-          isCompleted: false,
-          createDate: null,
-          modifiedDate: null,
-        },
-      ],
+      list: [],
     };
   },
   methods: {
     onCompleteClickHandler(item) {
-      let newList = this.list.map((todoItem) => {
-        if (todoItem.id === item.id) {
-          todoItem.isCompleted = !todoItem.isCompleted;
-        }
-        return todoItem;
-      });
-
-      this.list = [...newList];
+      item.isCompleted = !item.isCompleted;
+      this.$store.commit("updateTodo", { ...item });
     },
     onDeleteClickHandler(item) {
-      this.list = this.list.filter((todoItem) => todoItem.id != item.id);
+      this.$store.commit("removeTodo", item);
     },
     onSaveHandler(updatedItem) {
-      let newList = this.list.map((todoItem) => {
-        if (todoItem.id === updatedItem.id) {
-          todoItem = updatedItem;
-        }
-        return todoItem;
-      });
-
-      this.list = [...newList];
+      this.$store.commit("updateTodo", updatedItem);
     },
     onCreateHandler(message) {
       const newTodo = {
-        i: this.list.length,
+        id: this.$store.getters.todoItems.length,
         isCompleted: false,
         createDate: new Date().getTime(),
         modifiedDate: new Date().getTime(),
-        message: message
-      }
-      this.list.push(newTodo);
-    }
+        message: message,
+      };
+      this.$store.commit("addTodo", newTodo);
+    },
   },
 };
 </script>
