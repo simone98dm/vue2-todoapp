@@ -4,7 +4,7 @@
     <Button
       :clickEvent="onCreateHandler"
       :text="`Add`"
-      :variant="`btn__primary`"
+      :variant="`green`"
     ></Button>
   </div>
 </template>

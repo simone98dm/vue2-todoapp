@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item" :class="`card ${item.isCompleted ? `green` : `red`}`" v-on:click="onCardClickHandler">
+  <div v-if="item" :class="`card`" v-on:click="onCardClickHandler">
     <!-- <Badge
       :text="`Completed: ${item.isCompleted}`"
       :variant="item.isCompleted ? 'green' : 'red'"
@@ -11,12 +11,12 @@
     ></TextInput>
     <div class="card__footer">
       <Button
-        :variant="`btn__success`"
+        :variant="item.isCompleted ? `purple` : `blue`"
         :text="item.isCompleted ? `Not complete` : `Complete`"
         :clickEvent="onCompleteClickHandler"
       ></Button>
       <Button
-        :variant="`btn__error`"
+        :variant="`red`"
         :text="'Delete'"
         :clickEvent="onDeleteClickHandler"
       ></Button>

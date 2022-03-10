@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>Add new:</h1>
+    <h1 class="text-xl font-bold py-4">Add new:</h1>
     <Form v-on:create="onCreateHandler"></Form>
-    <h1>Todos:</h1>
+    <h1 class="text-xl font-bold py-4">Todos:</h1>
     <List
       :items="this.$store.getters.todoItems"
       v-on:complete="onCompleteClickHandler"
@@ -16,7 +16,7 @@
 import List from "./List.vue";
 import Form from "./Form.vue";
 import LocalStorageDataAccess from "../common/LocalStorageDataAccess";
-import { makeid } from '@/common/Common';
+import { makeid } from "@/common/Common";
 export default {
   name: "HomeComponent",
   components: {
@@ -30,7 +30,12 @@ export default {
   },
   mounted() {
     const storage = new LocalStorageDataAccess("todos");
-    storage.addRange(this.$store.getters.todoItems);
+    const existingItem = storage.retrieveAll();
+    if (existingItem) {
+      this.$store.commit("addTodos", existingItem);
+    } else {
+      storage.addRange(this.$store.getters.todoItems);
+    }
   },
   methods: {
     onCompleteClickHandler(item) {

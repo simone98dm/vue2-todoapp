@@ -9,7 +9,7 @@
       <Button
         :clickEvent="onSaveHandler"
         :text="`Confirm`"
-        :variant="`btn__success`"
+        :variant="`green`"
       ></Button>
     </div>
     <div v-else>

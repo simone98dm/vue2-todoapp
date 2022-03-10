@@ -1,10 +1,10 @@
 <template>
   <div class="input">
-    <label :v-for="_id" class="text__input">{{ this.label }}</label>
+    <label :v-for="_id" class="text-xl font-bold py-4">{{ this.label }}</label>
     <input
       type="text"
       :id="_id"
-      class="text__input"
+      class="w-full bg-white border-2 border-gray-300 shadow-lg px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500"
       v-model="message"
       v-on:change="onChangeHandler"
     />

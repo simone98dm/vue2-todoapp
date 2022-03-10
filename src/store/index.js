@@ -42,6 +42,10 @@ export default new Vuex.Store({
       state.list.push(item);
       storage.add(item);
     },
+    addTodos(state, items) {
+      state.list = items;
+      storage.addRange(items);
+    },
     removeTodo(state, item) {
       state.list = state.list.filter((todoItem) => todoItem.id != item.id);
       storage.remove(item);
