@@ -15,6 +15,8 @@
 <script>
 import List from "./List.vue";
 import Form from "./Form.vue";
+import LocalStorageDataAccess from "../common/LocalStorageDataAccess";
+import { makeid } from '@/common/Common';
 export default {
   name: "HomeComponent",
   components: {
@@ -26,20 +28,24 @@ export default {
       list: [],
     };
   },
+  mounted() {
+    const storage = new LocalStorageDataAccess("todos");
+    storage.addRange(this.$store.getters.todoItems);
+  },
   methods: {
     onCompleteClickHandler(item) {
       item.isCompleted = !item.isCompleted;
-      this.$store.commit("updateTodo", { ...item });
+      this.$store.commit("updateTodo", item);
     },
     onDeleteClickHandler(item) {
       this.$store.commit("removeTodo", item);
     },
-    onSaveHandler(updatedItem) {
-      this.$store.commit("updateTodo", updatedItem);
+    onSaveHandler(item) {
+      this.$store.commit("updateTodo", item);
     },
     onCreateHandler(message) {
       const newTodo = {
-        id: this.$store.getters.todoItems.length,
+        id: makeid(10),
         isCompleted: false,
         createDate: new Date().getTime(),
         modifiedDate: new Date().getTime(),
