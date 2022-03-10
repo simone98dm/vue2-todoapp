@@ -1,8 +1,9 @@
 <template>
   <div v-if="localItem">
-    <div v-if="showInput">
+    <div v-if="showInput" class="text__input">
       <Input
         :value="localItem.message"
+        :label="`Message`"
         v-on:change="(str) => (localItem.message = str)"
       ></Input>
       <Button
@@ -59,5 +60,8 @@ export default {
 <style scoped>
 .title {
   margin: 5px;
+}
+.text__input {
+  margin: 15px;
 }
 </style>

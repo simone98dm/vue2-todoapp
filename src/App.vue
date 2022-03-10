@@ -17,7 +17,7 @@ export default {
 <style>
 @import url("http://fonts.cdnfonts.com/css/product-sans");
 body {
-  background-color: #efefef;
+  background-color: #f8f8f8;
   font-family: "Product Sans", sans-serif;
 }
 </style>

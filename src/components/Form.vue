@@ -23,7 +23,9 @@ export default {
   },
   methods: {
     onCreateHandler() {
-      this.$emit(EVENTS.CREATE, this.localMessage);
+      if (this.localMessage != null) {
+        this.$emit(EVENTS.CREATE, this.localMessage);
+      }
     },
   },
 };
@@ -33,5 +35,6 @@ export default {
 <style scoped>
 .form {
   display: flex;
+  flex-direction: column;
 }
 </style>

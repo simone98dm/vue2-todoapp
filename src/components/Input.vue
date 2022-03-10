@@ -46,11 +46,12 @@ export default {
 
 <style scoped>
 .input {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 .text__input {
-  flex: 1;
-  padding: 5px 5px;
+  padding: 5px;
+  margin: 5px;
   font-size: 1.27em;
   border-radius: 5px;
 }

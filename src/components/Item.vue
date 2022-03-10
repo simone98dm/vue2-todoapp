@@ -1,9 +1,9 @@
 <template>
-  <div v-if="item" class="card" v-on:click="onCardClickHandler">
-    <Badge
-      :text="`${item.isCompleted}`"
+  <div v-if="item" :class="`card ${item.isCompleted ? `green` : `red`}`" v-on:click="onCardClickHandler">
+    <!-- <Badge
+      :text="`Completed: ${item.isCompleted}`"
       :variant="item.isCompleted ? 'green' : 'red'"
-    ></Badge>
+    ></Badge> -->
     <TextInput
       :item="this.item"
       :disableTextInput="disableTextInput"
@@ -12,7 +12,7 @@
     <div class="card__footer">
       <Button
         :variant="`btn__success`"
-        :text="'Complete'"
+        :text="item.isCompleted ? `Not complete` : `Complete`"
         :clickEvent="onCompleteClickHandler"
       ></Button>
       <Button
@@ -27,7 +27,7 @@
 
 <script>
 import Button from "./Button.vue";
-import Badge from "./Badge.vue";
+// import Badge from "./Badge.vue";
 import { EVENTS } from "@/common/Constants";
 import TextInput from "./TextInput.vue";
 export default {
@@ -62,7 +62,7 @@ export default {
       this.disableTextInput = true;
     },
   },
-  components: { Button, Badge, TextInput },
+  components: { Button, TextInput },
 };
 </script>
 
@@ -72,7 +72,6 @@ export default {
   background-color: #fff;
   border-radius: 7px;
   margin: 5px 0;
-  min-height: 150px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -86,11 +85,13 @@ export default {
 .card__footer {
   margin: 5px;
 }
-.label__green {
-  color: green;
+.green {
+  background-color: #2ecc71;
+  transition: .2s;
 }
-.label__red {
-  color: red;
+.red {
+  background-color: #e74c3c;
+  transition: .2s;
 }
 .card__footer {
 }

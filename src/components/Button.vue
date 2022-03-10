@@ -27,7 +27,7 @@ export default {
   min-width: 100px;
   border: 1px grey solid;
   border-radius: 5px;
-  margin: 0 5px;
+  margin: 5px;
   cursor: pointer;
   font-size: 1em;
   background-color: #fff;
